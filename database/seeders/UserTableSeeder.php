@@ -20,11 +20,11 @@ class UserTableSeeder extends Seeder
             "user_type" => User::USER_TYPE_ADMIN
         ]);
 
-        $merchant = User::create([
-            "name" => "merchant",
-            "email" => "merchant@example.com",
-            "password" => bcrypt("demopass"),
-            "user_type" => User::USER_TYPE_MERCHANT
-        ]);
+        // $merchant = User::create([
+        //     "name" => "merchant",
+        //     "email" => "merchant@example.com",
+        //     "password" => bcrypt("demopass"),
+        //     "user_type" => User::USER_TYPE_MERCHANT
+        // ]);
     }
 }

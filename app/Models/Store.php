@@ -11,7 +11,8 @@ class Store extends Model
 
     protected $fillable = [
         'store_name',
-        'slug'
+        'slug',
+        'user_id'
     ];
 
     public function categories(){

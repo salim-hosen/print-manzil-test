@@ -13,7 +13,8 @@ class Product extends Model
         'store_id',
         'category_id',
         'product_name',
-        'slug'
+        'slug',
+        'user_id'
     ];
 
 

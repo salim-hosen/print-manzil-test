@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class StoreController extends Controller
 {
     public function index() {
-        $stores = Store::paginate(15);
+        $stores = Store::where('user_id', auth()->user()->id)->paginate(15);
         return view('merchant.store.index', compact('stores'));
     }
 
@@ -23,7 +23,8 @@ class StoreController extends Controller
 
         Store::create([
             "store_name" => $request->store_name,
-            "slug" => Str::slug($request->store_name)
+            "slug" => Str::slug($request->store_name),
+            "user_id" => auth()->user()->id
         ]);
         return redirect()->route('stores.index')->with('success', "Store Created Successfully.");
     }

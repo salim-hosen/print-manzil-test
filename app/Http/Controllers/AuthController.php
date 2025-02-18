@@ -42,11 +42,12 @@ class AuthController extends Controller
 
         $data['password'] = bcrypt($data['password']);
         $data['user_type'] = User::USER_TYPE_MERCHANT;
-        User::create($data);
+        $user = User::create($data);
 
         Store::create([
             "store_name" => $request->shop_name,
-            "slug" => Str::slug($request->shop_name)
+            "slug" => Str::slug($request->shop_name),
+            "user_id" => $user->id
         ]);
 
         return redirect()->back()->with("success", "Registration Successful.");

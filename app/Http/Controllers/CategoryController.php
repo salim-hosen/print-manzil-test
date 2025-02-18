@@ -10,12 +10,12 @@ use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     public function index() {
-        $categories = Category::paginate(15);
+        $categories = Category::where('user_id', auth()->user()->id)->paginate(15);
         return view('merchant.category.index', compact('categories'));
     }
 
     public function create() {
-        $stores = Store::all();
+        $stores = Store::where('user_id', auth()->user()->id)->get();
         return view('merchant.category.create', compact('stores'));
     }
 
@@ -27,6 +27,7 @@ class CategoryController extends Controller
         ]);
         Category::create([
             "store_id" => $request->store,
+            "user_id" => auth()->user()->id,
             "category_name" => $request->category_name,
             "slug" => Str::slug($request->category_name)
         ]);

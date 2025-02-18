@@ -12,7 +12,8 @@ class Category extends Model
     protected $fillable = [
         "category_name",
         "store_id",
-        'slug'
+        'slug',
+        'user_id'
     ];
 
     public function store(){

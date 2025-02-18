@@ -11,13 +11,13 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::paginate(15);
+        $products = Product::where('user_id', auth()->user()->id)->paginate(15);
         return view('merchant.product.index', compact('products'));
     }
 
     public function create() {
-        $stores = Store::all();
-        $categories = Category::all();
+        $stores = Store::where('user_id', auth()->user()->id)->get();
+        $categories = Category::where('user_id', auth()->user()->id)->get();
         return view('merchant.product.create', compact('stores', 'categories'));
     }
 
@@ -31,6 +31,7 @@ class ProductController extends Controller
 
         Product::create([
             'store_id' => $request->store,
+            "user_id" => auth()->user()->id,
             'category_id' => $request->category,
             'product_name' => $request->product_name,
             "slug" => Str::slug($request->product_name)
