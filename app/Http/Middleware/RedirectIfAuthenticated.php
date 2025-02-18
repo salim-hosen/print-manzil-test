@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if(auth()->user()->user_type == User::USER_TYPE_MERCHANT) return redirect('/stores');
+                if(auth()->user()->user_type == User::USER_TYPE_ADMIN) return redirect('/admin/dashboard');
                 return redirect(RouteServiceProvider::HOME);
             }
         }
